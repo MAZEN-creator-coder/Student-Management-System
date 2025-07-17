@@ -19,3 +19,15 @@ def add_student():
         print("Student added successfully.")
     except ValueError:
         print("Invalid input. Please enter numeric values for ID and grade.")
+
+def load_students():
+    try:
+        with open(DB_FILE, 'r') as file:
+            return json.load(file)
+    except FileNotFoundError:
+        return []
+
+def save_students(students):
+    with open(DB_FILE, 'w') as file:
+        json.dump(students, file, indent=4)
+
