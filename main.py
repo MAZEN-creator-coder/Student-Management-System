@@ -1,6 +1,13 @@
 import json
 DB_FILE = "students.json"
 
+
+def find_student_by_id(students, student_id):
+    for student in students:
+        if student["id"] == student_id:
+            return student
+    return None
+
 def add_student():
     students = load_students()
     try:
@@ -30,4 +37,5 @@ def load_students():
 def save_students(students):
     with open(DB_FILE, 'w') as file:
         json.dump(students, file, indent=4)
+
 
