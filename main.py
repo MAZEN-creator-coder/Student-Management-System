@@ -1,24 +1,22 @@
 import json
 DB_FILE = "students.json"
 
-def add_student():
-    students = load_students()
+def add_student(students):
+    name = input("Enter student name: ").strip()
+    
     try:
-        student_id = int(input("Enter student ID: "))
-        name = input("Enter student name: ")
-        grade = float(input("Enter student grade (0-100): "))
-        if grade < 0 or grade > 100:
-            print("Grade must be between 0 and 100.")
-            return
-        for student in students:
-            if student['id'] == student_id:
-                print("Student ID already exists.")
-                return
-        students.append({"id": student_id, "name": name, "grade": grade})
-        save_students(students)
-        print("Student added successfully.")
+        grade_input = input("Enter student grade (0–100): ").strip()
+        grade = float(grade_input)
+        
+        if 0 <= grade <= 100:
+            new_id = max([s["id"] for s in students], default=0) + 1
+            students.append({"id": new_id, "name": name, "grade": grade})
+            save_students(students)
+            print("✅ Student added successfully.")
+        else:
+            print("❌ Grade must be between 0 and 100.")
     except ValueError:
-        print("Invalid input. Please enter numeric values for ID and grade.")
+        print("❌ Invalid grade. Please enter a numeric value.")
 
 def load_students():
     try:
