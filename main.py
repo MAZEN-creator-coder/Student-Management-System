@@ -46,5 +46,10 @@ def save_students(students):
     with open(DB_FILE, 'w') as file:
         json.dump(students, file, indent=4)
 
-
+def calculate_average_grade(students):
+    if not students:
+        print("No students to calculate.")
+        return
+    average = sum(s["grade"] for s in students) / len(students)
+    print(f"Average grade: {average:.2f}")
 
