@@ -125,4 +125,17 @@ def main():
         else:
             print("Invalid choice.")
 
+def delete_student(students):
+    try:
+        student_id = int(input("Enter student ID to delete: "))
+        student = find_student_by_id(students, student_id)
+        if student:
+            students.remove(student)
+            save_students(students)
+            print("Student deleted.")
+        else:
+            print("Student not found.")
+    except ValueError:
+        print("Invalid ID.")
+
 
