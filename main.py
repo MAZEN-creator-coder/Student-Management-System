@@ -46,5 +46,9 @@ def save_students(students):
     with open(DB_FILE, 'w') as file:
         json.dump(students, file, indent=4)
 
-
-
+def find_top_student(students):
+    if not students:
+        print("No students available.")
+        return
+    top = max(students, key=lambda s: s["grade"])
+    print(f"Top student: {top['name']} (ID: {top['id']}), Grade: {top['grade']}")
